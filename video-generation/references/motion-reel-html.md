@@ -21,10 +21,17 @@ The reel is ONE self-contained HTML file that, opened full-screen in a phone bro
 - Motion types: slide-in, pop with scale, highlight swipe (a colored box that wipes behind a keyword), waveform bounce, mockup tilt-in. Ease-out, snappy (150–400ms). Never slow fades.
 - Watermark/handle: small, bottom or side, optional.
 
+## Captions inside the reel
+
+- Every scene carries its own caption element, rendered in HTML inside the 9:16 stage: max 2 words, huge bold, lower third but above the bottom 15% (TikTok UI zone).
+- One accent color on the key word, the rest in the ink color. Caption pops in exactly when the word is spoken (set `animation-delay` from the scene's VO timing).
+- Because captions are in the recording, CapCut needs NO auto-captions step.
+
 ## Timing and sync with voice-over
 
 - Write each scene's duration to match its VO line(s): roughly 1 second per 2–2.5 Arabic words, plus 0.3s breathing room. Put the duration map in an HTML comment at the top so it is easy to retime.
 - The user aligns VO in CapCut; minor drift is fixed there by trimming/speeding. Design scenes as independent blocks so one scene can be shortened without breaking others.
+- Real durations win: once the audio clips exist, ask the user for each clip's length in seconds and set the JS scene array `D` to clip length + 0.3s. Re-output the reel with the new `D`.
 - If the user reports the VO is longer than the reel, increase scene durations in the JS timing array — that is a one-line edit.
 
 ## Output checklist (verify before handing over)
@@ -34,3 +41,5 @@ The reel is ONE self-contained HTML file that, opened full-screen in a phone bro
 3. Scene count and durations match the script; total 30–60s.
 4. No external assets besides fonts; works in a phone browser full-screen.
 5. Colors: bg/ink/accent set named in an HTML comment, so palette swaps are one edit.
+6. Real run check (not only tag balance): the scheduler actually advances. Mentally run the first 3 scenes: scene 1 shows at t=0.8s, `D[i]` timers fire in order, each scene's caption appears, the last scene holds and stops. Confirm there is a visible "done" state (end card) and no JS error path: every `getElementById`/`querySelector` target exists, every `D[i]` has a matching scene, `setTimeout` chain has no off-by-one. If you can run code, load the file and check the console is clean and the end card appears at sum(D)+lead-in.
+7. Fullscreen: tell the user to open the artifact fullscreen / in the browser before recording.
