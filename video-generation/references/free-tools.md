@@ -18,7 +18,7 @@ Everything must work from Egypt, on a phone browser, without a credit card.
 
 ## Assembly — CapCut app (free)
 
-- Import screen recording + VO mp3 → align → auto-captions (Arabic) → optional music → export 1080p.
+- Import screen recording + VO mp3 → align → (captions are already inside the reel, skip auto-captions) → optional music → export 1080p.
 - CapCut is free from Egyptian app stores; watermark can be removed by deleting the outro clip.
 
 ## Route B: AI video/image generators (only for realistic footage requests)
