@@ -29,11 +29,12 @@ Route A is the default. Read `references/motion-reel-html.md` before building th
 2. **Storyboard → scene plan.** One scene per 1–2 lines; assign each scene a duration in seconds. Vary the palette between videos (pick a fresh bg/ink/accent set each time) so the user's videos never look identical.
 3. **Build the reel HTML.** Output ONE artifact: a single self-contained HTML file that plays the whole video automatically (all scenes, animations, timing) at 9:16. No external assets except Google Fonts. Spec in `references/motion-reel-html.md`.
 4. **Voice-over text.** Output the VO lines separately (plain text) for the TTS step, matching the scene order. See `references/voice-captions.md`.
+   **Audio first, then timing.** After the user makes the audio, ask for each clip's duration in seconds (one number per clip). Set the scene duration array `D` in the HTML from those numbers (clip length + 0.3s), then re-output the reel. Do not guess durations once real ones exist.
 5. **Tell the user exactly what to do** (short numbered steps, their language):
    - Open the HTML on the phone (tap the artifact → "open in browser" / download and open).
    - Start the phone's screen recorder, play the reel full-screen, stop at the end.
    - Generate the VO mp3 on a free Arabic TTS site (see `references/free-tools.md`).
-   - In CapCut: new project → import the recording → add the VO audio → align, trim silence, auto-captions (Arabic) → optional background music → export 1080p.
+   - In CapCut: new project → import the recording → add the VO audio → align, trim silence, NO auto-captions (captions are already inside the reel) → optional background music → export 1080p.
    Assembly details in `references/assembly.md`.
 6. **Iterate.** When the user gives feedback ("make the hook stronger", "change the colors"), edit the script/HTML and output the updated reel. Small feedback = small edit, not a rebuild.
 
@@ -46,5 +47,6 @@ Script and storyboard as above, then write one generation prompt per scene (see 
 - Vertical 9:16, 30–60 seconds. Hook in the first 2 seconds.
 - Arabic-first: RTL text, Arabic fonts (Tajawal, Cairo), Egyptian-friendly wording unless the user wants MSA or another dialect.
 - Never claim the AI generated a real person, real results, or earnings. No fake testimonials.
+- Captions live INSIDE the reel scenes (max 2 words, accent on the key word). Never tell the user to run auto-captions in CapCut.
 - Keep every output copy-paste-simple: the user is on a phone.
 - If a step fails on the user's phone, offer the simplest fallback (e.g. own-voice recording instead of TTS) instead of adding tools.
